@@ -13,6 +13,40 @@ def Splash():
 
     return
 
+def CheckBoxWindowVactor():
+
+    layout = [
+        
+        [sg.Text('Select All Harnesses to Be Tested', font = ('Helvetica', 24))],
+		[sg.Checkbox('269022 - Dual Pressure ', key = '-269022-')],
+		[sg.Checkbox('269024 - Ground', key = '-269024-', default = True)],
+		[sg.Checkbox('269025 - Temperature', key = '-269025-', default = True)],
+		[sg.Checkbox('269026 - Pressure', key = '-269026-', default = True)],
+		[sg.Checkbox('269028 - Generator', key = '-269028-')],
+		[sg.Checkbox('269030 / 269300 / 269308 in PTO', key = '-PTO-', default = True)],
+		[sg.Checkbox('269030 / 269300 / 269308 in AUX', key = '-AUX-')],
+		[sg.Radio('269828 - Underhood', "UH", key = '-269828-'), sg.Radio('269840 - Underhood', "UH", key = '-269840-'), sg.Radio('273434 - Underhood', "UH", key = '-273434-', default = True), sg.Radio('273620 - Underhood', "UH", key = '-273620-')],
+        [sg.Radio('274339 - Underhood', "UH", key = '-274339-'), sg.Radio('274340 - Underhood', "UH", key = '-274340-'), sg.Radio('277136 - Underhood', "UH", key = '-277136-')],
+        [sg.Checkbox('275469 - Display', key = '-275469-', default = True)],
+        [sg.Radio('276206 - J1939', "J1939", key = '-276206-', default = True), sg.Radio('276757 - J1939', "J1939", key = '-276757-'), sg.Radio('None - J1939', "J1939", key = '-NoneJ1939-')],
+        [sg.Checkbox('277319 - Remote Start', key = '-277319-')],
+        [sg.Checkbox('277896 - Generator and Aux. Hydro. Splitter', key ='-277896-')],
+        [sg.Checkbox('277898 - Hydraulic', key ='-277898-')],
+        [sg.Checkbox('278610 - Muncie PTO PWM', key = '-278610-')],
+		[sg.OK(pad = (20, 20)), sg.Cancel(pad = (20, 20))]
+
+        ]
+
+    window = sg.Window('Vactor Harnesses', layout)
+
+    event, values = window.Read()
+
+    print(event, values)
+
+    window.Close()
+
+    return (event, values)
+
 
 def CheckBoxWindowFord():
     #This function gathers the data on which harnesses are being tested and what fan config
@@ -368,21 +402,41 @@ def NonFordHarnessHash(n):
 
     return hash
 
+def VactorHarnessHash(n):
+
+    #269022 is DP - Dual Pressure
+    #269028 is GEN - Generator
+    #277319 is REM - Remote Engage
+    #277896 & 277898 are HYD - Hyrdaulic
+    #278610 is PWM PTO - Pulse Width Modulation PTO
+
+    hash = 'Unsupported combination.  Please retry or contact Engineering.'
+
+    if n.get('-266405-') and n.get('-269024-') and n.get('-269025-') and n.get('-269026-') \
+    and n.get('-PTO-') and n.get('-273434-') and n.get('-275469-') and n.get('-279202-') and n.get('-279372-'): 
+
+        hash = 'Program: Vactor, ID: Standard'
+
+    return hash
+
 def harness():
 
     #This function makes the first radio popup menu and guides through the rest of the menus.
     Fordpop = 0
     NonFordpop = 0
+    Vactorpop = 0
     FordHarnesses_event = 0
     NonFordHarnesses_event = 0
+    VactorHarnesses_event = 0
 
     layout = [
 	    [sg.Radio('Ford', "MAKERADIO", key = '-FORD-', default = True, pad = (32, 10)),
-	    sg.Radio('Non-Ford', "MAKERADIO", key = '-NONFORD-', pad = (32, 10))],
-	    [sg.Submit(pad = (42, 10)), sg.Exit(pad = (42, 10))]
+	    sg.Radio('Non-Ford', "MAKERADIO", key = '-NONFORD-', pad = (32, 10)), sg.Radio('Vactor', "MAKERADIO", key = '-VACTOR-', pad = (32, 10)),
+        sg.Radio('V-TEC2', "MAKERADIO", key = '-VTEC2-', pad = (32, 10))],
+	    [sg.Submit(pad = (100, 10)), sg.Exit(pad = (100, 10))]
     ]
 
-    window = sg.Window('Harness Selector', layout, size = (300, 100))
+    window = sg.Window('Harness Selector', layout, size = (570, 100))
 
     event, values = window.Read()
 
@@ -418,6 +472,20 @@ def harness():
                 nxd.Down('NonFord2fan')
 
             NonFordHarnessHash(NonFordHarnesses_values)
+
+    elif values['-VACTOR-'] is True and event not in ('Exit', None):   #Checks if window is canceled or closed
+        VactorHarnesses_event, VactorHarnesses_values = CheckBoxWindowVactor()
+        
+        if VactorHarnesses_event not in ('Cancel', None):  #Returns the Non-Ford Harness Tag
+            
+
+            if VactorHarnesses_values.get('-SingleFan-'):
+                nxd.Down('Vactor')
+
+            elif VactorHarnesses_values.get('-DualFan-'):
+                nxd.Down('NonFord2fan')
+
+            VactorHarnessHash(VactorHarnesses_values)
 
     window.Close()
     
