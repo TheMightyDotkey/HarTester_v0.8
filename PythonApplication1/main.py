@@ -5,6 +5,7 @@ import threading
 
 def Splash():
     
+    print('a dead cat')
 
     layout = [[sg.Text('Harness Tester Program Selector')]]
     window = sg.Window('Title', layout, no_titlebar = True, auto_close = True, auto_close_duration = 3)
