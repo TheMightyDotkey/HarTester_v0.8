@@ -462,7 +462,7 @@ def harness():
     layout = [
 	    [sg.Radio('Ford', "MAKERADIO", key = '-FORD-', default = True, pad = (32, 10)),
 	    sg.Radio('Non-Ford', "MAKERADIO", key = '-NONFORD-', pad = (32, 10)), sg.Radio('Vactor', "MAKERADIO", key = '-VACTOR-', pad = (32, 10)),
-        sg.Radio('V-TEC2', "MAKERADIO", key = '-VTEC2-', pad = (32, 10))],
+        sg.Radio('V-TEC2', "MAKERADIO", key = '-VTEC2-', pad = (32, 10), disabled = 1)], #CURRENTLY DISABLED
 	    [sg.Submit(pad = (100, 10)), sg.Exit(pad = (100, 10))]
     ]
 
