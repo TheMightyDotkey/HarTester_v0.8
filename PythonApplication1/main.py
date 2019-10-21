@@ -146,6 +146,9 @@ def FordHarnessHash(n):
 
     elif n.get('-269022-') and n.get('-269024-') and n.get('-269025-') and n.get('-269026-') and not n.get('-269028-') and n.get('-PTO-') and n.get('-269991-') and n.get('-275469-') and n.get('-278610-') and not n.get('-277896-') and not n.get('-277898-') and n.get('-SingleFan-'):
         hash = 'Program: Ford_1fan, ID: Ford w/DualPress'
+
+    elif n.get('-269022-') and n.get('-269024-') and n.get('-269025-') and n.get('-269026-') and n.get('-269028-') and n.get('-PTO-') and n.get('-269991-') and n.get('-275469-') and n.get('-278610-') and not n.get('-277896-') and not n.get('-277898-') and n.get('-SingleFan-'):
+        hash = 'Program: Ford_1fan, ID: Ford w/GenDP'
     
     elif not n.get('-269022-') and n.get('-269024-') and n.get('-269025-') and n.get('-269026-') and n.get('-269028-') and n.get('-PTO-') and n.get('-269991-') and n.get('-275469-') and n.get('-278610-') and n.get('-277896-') and not n.get('-277898-') and n.get('-SingleFan-'): 
         hash = 'Program: Ford_1fan, ID: Ford w/GenAuxHdySw'
@@ -161,6 +164,9 @@ def FordHarnessHash(n):
 
     elif n.get('-269022-') and n.get('-269024-') and n.get('-269025-') and n.get('-269026-') and not n.get('-269028-') and n.get('-PTO-') and n.get('-269991-') and n.get('-275469-') and n.get('-278610-') and not n.get('-277896-') and not n.get('-277898-') and n.get('-DualFan-'):
         hash = 'Program: Ford_2fan, ID: Ford w/DualPress'
+
+    elif n.get('-269022-') and n.get('-269024-') and n.get('-269025-') and n.get('-269026-') and n.get('-269028-') and n.get('-PTO-') and n.get('-269991-') and n.get('-275469-') and n.get('-278610-') and not n.get('-277896-') and not n.get('-277898-') and n.get('-DualFan-'):
+        hash = 'Program: Ford_2fan, ID: Ford w/GenDP'
     
     elif not n.get('-269022-') and n.get('-269024-') and n.get('-269025-') and n.get('-269026-') and n.get('-269028-') and n.get('-PTO-') and n.get('-269991-') and n.get('-275469-') and n.get('-278610-') and n.get('-277896-') and not n.get('-277898-') and n.get('-DualFan-'): 
         hash = 'Program: Ford_2fan, ID: Ford w/GenAuxHdySw'
@@ -237,6 +243,8 @@ def NonFordHarnessHash(n):
                 hash = 'Program: NonFord_1fan, ID: PWM PTO UH273620'
             elif n.get('-273434-'):
                 hash = 'Program: NonFord_1fan, ID: PWM PTO UH273434'
+            elif n.get('-274339-'):
+                hash = 'Program: NonFord_1fan, ID: PWM PTO UH274339'
 
         #Checks if the harness is "GEN". Standard + GEN.
         elif not n.get('-269022-') and n.get('-269028-') and n.get('-PTO-') and not n.get('-AUX-') \
@@ -246,13 +254,15 @@ def NonFordHarnessHash(n):
                 hash = 'Program: NonFord_1fan, ID: GEN UH273434'
             elif n.get('-274339-'):
                 hash = 'Program: NonFord_1fan, ID: GEN UH274339'
+            elif n.get('-274340-'):
+                hash = 'Program: NonFord_1fan, ID: GEN UH274340'
         
         #Checks if the harness is "GEN PWM PTO". Standard + GEN + PWM PTO.
         elif not n.get('-269022-') and n.get('-269028-') and n.get('-PTO-') and not n.get('-AUX-') \
         and not n.get('-277319-') and not n.get('-277896-') and not n.get('-277898-') and n.get('-278610-'):   
 
             if n.get('-274340-'):
-                hash = 'Program: NonFord_1fan, ID: GEN UH273434'
+                hash = 'Program: NonFord_1fan, ID: GEN PWM PTO UH274340' 
 
         #Checks if the harness is "GEN AUX HYD". Standard + GEN + HYDRO + AUX.
         elif not n.get('-269022-') and n.get('-269028-') and n.get('-PTO-') and n.get('-AUX-') \
@@ -340,6 +350,8 @@ def NonFordHarnessHash(n):
                 hash = 'Program: NonFord_2fan, ID: PWM PTO UH273620'
             elif n.get('-273434-'):
                 hash = 'Program: NonFord_2fan, ID: PWM PTO UH273434'
+            elif n.get('-274339-'):
+                hash = 'Program: NonFord_2fan, ID: PWM PTO UH274339'
 
         #Checks if the harness is "GEN". Standard + GEN.
         elif not n.get('-269022-') and n.get('-269028-') and n.get('-PTO-') and not n.get('-AUX-') \
@@ -349,13 +361,15 @@ def NonFordHarnessHash(n):
                 hash = 'Program: NonFord_2fan, ID: GEN UH273434'
             elif n.get('-274339-'):
                 hash = 'Program: NonFord_2fan, ID: GEN UH274339'
+            elif n.get('-274340-'):
+                hash = 'Program: NonFord_1fan, ID: GEN UH274340'
         
         #Checks if the harness is "GEN PWM PTO". Standard + GEN + PWM PTO.
         elif not n.get('-269022-') and n.get('-269028-') and n.get('-PTO-') and not n.get('-AUX-') \
         and not n.get('-277319-') and not n.get('-277896-') and not n.get('-277898-') and n.get('-278610-'):   
 
             if n.get('-274340-'):
-                hash = 'Program: NonFord_2fan, ID: GEN UH273434'
+                hash = 'Program: NonFord_2fan, ID: GEN PWM PTO UH274340'
 
         #Checks if the harness is "GEN AUX HYD". Standard + GEN + HYDRO + AUX.
         elif not n.get('-269022-') and n.get('-269028-') and n.get('-PTO-') and n.get('-AUX-') \
