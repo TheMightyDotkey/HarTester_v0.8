@@ -176,9 +176,7 @@ def FordHarnessHash(n):
 
     Fordpop = sg.PopupOKCancel(hash, title = 'Ford Program') 
         
-    if Fordpop is 'OK':
-
-        harness()
+    
 
 #This function takes the data from the events and values passed by the
 #Check box window function and makes a popup window stating
@@ -425,10 +423,6 @@ def NonFordHarnessHash(n):
 
     NonFordpop = sg.PopupOKCancel(hash, title = 'NonFord Program')
 
-    if NonFordpop is 'OK':
-
-        harness()
-
 
     return hash
 
@@ -457,77 +451,116 @@ def VactorHarnessHash(n):
 
     Vactorpop = sg.PopupOKCancel(hash, title = 'Vactor Program') 
         
-    if Vactorpop is 'OK':
-
-        harness()
 
     return hash
 
+    #This function checks to see if the user
+    #wants the program to download to NXView or not.
+
+def DLorNo():
+
+    #This function checks to see if the user
+    #wants the program to download to NXView or not.
+    
+    ans = False
+
+    YesNo = sg.PopupYesNo('Download Main Program?', title = 'Download Main')
+
+    if YesNo is 'Yes':
+        ans = True
+
+    return(ans)
+
 def harness():
 
-    #This function makes the first radio popup menu and guides through the rest of the menus.
-    Fordpop = 0
-    NonFordpop = 0
-    Vactorpop = 0
-    FordHarnesses_event = 0
-    NonFordHarnesses_event = 0
-    VactorHarnesses_event = 0
+    keepGoing = True
 
-    layout = [
-	    [sg.Radio('Ford', "MAKERADIO", key = '-FORD-', default = True, pad = (32, 10)),
-	    sg.Radio('Non-Ford', "MAKERADIO", key = '-NONFORD-', pad = (32, 10)), sg.Radio('Vactor', "MAKERADIO", key = '-VACTOR-', pad = (32, 10)),
-        sg.Radio('V-TEC2', "MAKERADIO", key = '-VTEC2-', pad = (32, 10), disabled = 1)], #CURRENTLY DISABLED
-	    [sg.Submit(pad = (100, 10)), sg.Exit(pad = (100, 10))]
-    ]
+    while keepGoing is True:
 
-    window = sg.Window('Harness Selector', layout, size = (570, 100))
 
-    event, values = window.Read()
 
-    window.Close()
+        #This function makes the first radio popup menu and guides through the rest of the menus.
+        Fordpop = 0
+        NonFordpop = 0
+        Vactorpop = 0
+        FordHarnesses_event = 0
+        NonFordHarnesses_event = 0
+        VactorHarnesses_event = 0
 
-    print(values)
+        layout = [
+	        [sg.Radio('Ford', "MAKERADIO", key = '-FORD-', default = True, pad = (32, 10)),
+	        sg.Radio('Non-Ford', "MAKERADIO", key = '-NONFORD-', pad = (32, 10)), sg.Radio('Vactor', "MAKERADIO", key = '-VACTOR-', pad = (32, 10)),
+            sg.Radio('V-TEC2', "MAKERADIO", key = '-VTEC2-', pad = (32, 10), disabled = 1)], #CURRENTLY DISABLED
+	        [sg.Submit(pad = (100, 10)), sg.Exit(pad = (100, 10))]
+        ]
 
-    if values['-FORD-'] is True and event not in ('Exit', None):  #Checks if window is canceled or closed
-        FordHarnesses_event, FordHarnesses_values = CheckBoxWindowFord() #Returns the Ford Harness Tag
+        window = sg.Window('Harness Selector', layout, size = (570, 100))
 
-        if FordHarnesses_event not in ('Cancel', None):  
+        event, values = window.Read()
+
+        window.Close()
+
+        print(values)
+
+        if values['-FORD-'] is True and event not in ('Exit', None):  #Checks if window is canceled or closed
+            FordHarnesses_event, FordHarnesses_values = CheckBoxWindowFord() #Returns the Ford Harness Tag
+
+            if FordHarnesses_event not in ('Cancel', None):  
              
-            if FordHarnesses_values.get('-SingleFan-'):
-                nxd.Down('Ford1fan')
+                Fordpop = FordHarnessHash(FordHarnesses_values)
 
-            elif FordHarnesses_values.get('-DualFan-'):
-                nxd.Down('Ford2fan')
+                downloadQuestion = DLorNo() #Checks to see if the user wants to download the main program
+                
+                if downloadQuestion is True:
+
+                    if FordHarnesses_values.get('-SingleFan-'):
+                        nxd.Down('Ford1fan')
+
+                    elif FordHarnesses_values.get('-DualFan-'):
+                        nxd.Down('Ford2fan')
             
-            Fordpop = FordHarnessHash(FordHarnesses_values)
+            
             
            
 
-    elif values['-NONFORD-'] is True and event not in ('Exit', None):   #Checks if window is canceled or closed
-        NonFordHarnesses_event, NonFordHarnesses_values = CheckBoxWindowNonFord() #Returns the Non-Ford Harness Tag
+        elif values['-NONFORD-'] is True and event not in ('Exit', None):   #Checks if window is canceled or closed
+            NonFordHarnesses_event, NonFordHarnesses_values = CheckBoxWindowNonFord() #Returns the Non-Ford Harness Tag
         
-        if NonFordHarnesses_event not in ('Cancel', None):  
+            if NonFordHarnesses_event not in ('Cancel', None):  
+            
+                NonFordHarnessHash(NonFordHarnesses_values)
+
+                downloadQuestion = DLorNo() #Checks to see if the user wants to download the main program
+                
+                if downloadQuestion is True:
+
+                    if NonFordHarnesses_values.get('-SingleFan-'):
+                        nxd.Down('NonFord1fan')
+
+                    elif NonFordHarnesses_values.get('-DualFan-'):
+                        nxd.Down('NonFord2fan')
+
             
 
-            if NonFordHarnesses_values.get('-SingleFan-'):
-                nxd.Down('NonFord1fan')
-
-            elif NonFordHarnesses_values.get('-DualFan-'):
-                nxd.Down('NonFord2fan')
-
-            NonFordHarnessHash(NonFordHarnesses_values)
-
-    elif values['-VACTOR-'] is True and event not in ('Exit', None):   #Checks if window is canceled or closed
-        VactorHarnesses_event, VactorHarnesses_values = CheckBoxWindowVactor() #Returns the Vactor Harness Tag
+        elif values['-VACTOR-'] is True and event not in ('Exit', None):   #Checks if window is canceled or closed
+            VactorHarnesses_event, VactorHarnesses_values = CheckBoxWindowVactor() #Returns the Vactor Harness Tag
         
-        if VactorHarnesses_event not in ('Cancel', None):  
+            if VactorHarnesses_event not in ('Cancel', None):  
+            
+                VactorHarnessHash(VactorHarnesses_values)
+
+                downloadQuestion = DLorNo() #Checks to see if the user wants to download the main program
                 
-            nxd.Down('Vactor')
+                if downloadQuestion is True:
+            
+                    nxd.Down('Vactor')
 
-            VactorHarnessHash(VactorHarnesses_values)
+        elif event is 'Exit':
+            keepGoing = False
+            
 
-    window.Close()
-    
+        window.Close()
+
    
 
 
@@ -537,7 +570,7 @@ def harness():
 def main():
 
     #Splash()
-   
+
     b = threading.Thread(name = 'HarTest', target = harness)   
 
     b.start()
