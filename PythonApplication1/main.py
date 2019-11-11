@@ -174,7 +174,8 @@ def FordHarnessHash(n):
     elif n.get('-269022-') and n.get('-269024-') and n.get('-269025-') and n.get('-269026-') and n.get('-269028-') and n.get('-PTO-') and n.get('-269991-') and n.get('-275469-') and n.get('-278610-') and n.get('-277896-') and n.get('-277898-') and n.get('-DualFan-'):
         hash = 'Program: Ford_2fan, ID: Ford w/GenDPAuxHydSw'
 
-    Fordpop = sg.PopupOKCancel(hash, title = 'Ford Program') 
+
+    return hash
         
     
 
@@ -436,8 +437,6 @@ def NonFordHarnessHash(n):
                 hash = 'Program: NonFord_2fan, ID: REM PWM PTO UH274340'
 
 
-    NonFordpop = sg.PopupOKCancel(hash, title = 'NonFord Program')
-
 
     return hash
 
@@ -464,26 +463,43 @@ def VactorHarnessHash(n):
 
         hash = 'Program: Vactor, ID: Standard'
 
-    Vactorpop = sg.PopupOKCancel(hash, title = 'Vactor Program') 
-        
+   
 
     return hash
 
     #This function checks to see if the user
     #wants the program to download to NXView or not.
 
-def DLorNo():
+def DLorNo(hash):
 
     #This function checks to see if the user
     #wants the program to download to NXView or not.
     
     ans = False
 
-    YesNo = sg.PopupYesNo('Download Main Program?', title = 'Download Main')
+    #Layout for Program download window.
+    layout = [
+        [sg.Text(hash)],
+        [sg.OK(), sg.Button(button_text = "Download Main Program", key = '-DOWNLOAD-')]
+        ]
 
-    if YesNo is 'Yes':
-        ans = True
+    window = sg.Window('Program Download', layout)
 
+    while True: #Downloads the program if download is clicked.  If OK is clicked loops back to main.
+        #If X then exit.
+
+        event, values = window.read()
+        if event in (None, 'Exit'):
+            break
+        if event == '-DOWNLOAD-':
+            ans = True
+            break
+        if event == 'OK':
+            break
+
+    window.close()
+
+    #Returns a True/False that triggers nxdown in harness()
     return(ans)
 
 def harness():
@@ -524,7 +540,7 @@ def harness():
              
                 Fordpop = FordHarnessHash(FordHarnesses_values)
 
-                downloadQuestion = DLorNo() #Checks to see if the user wants to download the main program
+                downloadQuestion = DLorNo(Fordpop) #Checks to see if the user wants to download the main program
                 
                 if downloadQuestion is True:
 
@@ -533,7 +549,8 @@ def harness():
 
                     elif FordHarnesses_values.get('-DualFan-'):
                         nxd.Down('Ford2fan')
-            
+
+                    sg.PopupOKCancel(Fordpop, title = 'Ford Program')
             
             
            
@@ -543,9 +560,9 @@ def harness():
         
             if NonFordHarnesses_event not in ('Cancel', None):  
             
-                NonFordHarnessHash(NonFordHarnesses_values)
+                NonFordpop = NonFordHarnessHash(NonFordHarnesses_values)
 
-                downloadQuestion = DLorNo() #Checks to see if the user wants to download the main program
+                downloadQuestion = DLorNo(NonFordpop) #Checks to see if the user wants to download the main program
                 
                 if downloadQuestion is True:
 
@@ -555,6 +572,7 @@ def harness():
                     elif NonFordHarnesses_values.get('-DualFan-'):
                         nxd.Down('NonFord2fan')
 
+                    sg.PopupOKCancel(NonFordpop, title = 'NonFord Program')
             
 
         elif values['-VACTOR-'] is True and event not in ('Exit', None):   #Checks if window is canceled or closed
@@ -562,15 +580,17 @@ def harness():
         
             if VactorHarnesses_event not in ('Cancel', None):  
             
-                VactorHarnessHash(VactorHarnesses_values)
+                Vactorpop = VactorHarnessHash(VactorHarnesses_values)
 
-                downloadQuestion = DLorNo() #Checks to see if the user wants to download the main program
+                downloadQuestion = DLorNo(Vactorpop) #Checks to see if the user wants to download the main program
                 
                 if downloadQuestion is True:
             
                     nxd.Down('Vactor')
 
-        elif event is 'Exit':
+                    sg.PopupOKCancel(Vactorpop, title = 'Vactor Program')
+
+        elif event in ('Exit', None):
             keepGoing = False
             
 
