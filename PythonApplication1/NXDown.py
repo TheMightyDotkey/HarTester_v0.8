@@ -35,5 +35,5 @@ def Down(progType):
 
     nxtApi = nxtApiProto (("NXDownloadEx", nxtDll), nxtApiParams)
 
-    nxtApi('COM3', None, progLoc, None, 0, 0)
+    nxtApi('COM4', None, progLoc, None, 0, 0)
 
