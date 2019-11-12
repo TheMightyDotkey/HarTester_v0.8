@@ -56,9 +56,10 @@ def CheckBoxWindowVactor():
 #It returns events and values
 
 def CheckBoxWindowFord():
-    #This function gathers the data on which harnesses are being tested and what fan config
+    """This function gathers the data on which harnesses
+    are being tested and what fan config"""
 
-	layout = [
+    layout = [
 		[sg.Text('Select Fan Setup', font = ('Helvetica', 24))],
         [sg.Radio('Single Fan', "FAN", key = '-SingleFan-', default = True), sg.Radio('Dual Fan', "FAN", key = '-DualFan-')],
         [sg.Radio('Fan w/ Aftercooler', "FAN", key = '-FanAftercooler-'), sg.Radio('Dual Fan w/ Dual Aftercooler', "FAN", key = '-DualFanDualAftercooler-')],
@@ -78,25 +79,27 @@ def CheckBoxWindowFord():
         
 		[sg.OK(pad = (20, 20)), sg.Cancel(pad = (20, 20))]
 		]
-	
-	window = sg.Window('Ford Harnesses', layout)
 
-	event, values = window.Read()
+    window = sg.Window('Ford Harnesses', layout)
 
-	print(event, values)
+    event, values = window.Read()
 
-	window.Close()
+    print(event, values)
 
-	return (event, values)
+    window.Close()
+
+    return (event, values)
 
 #This function gathers the data on what harnesses are being tested from the operator.
 #It returns events and values
-		
+
 def CheckBoxWindowNonFord():
 
-    #This function gathers the data on which harnesses are being tested and what fan config
+    """This function gathers the data using a GUI on which
+    harnesses are being tested and what fan config
+    specifically for Fords"""
 
-	layout = [
+    layout = [
         [sg.Text('Select Fan Setup', font = ('Helvetica', 24))],
         [sg.Radio('Single Fan', "FAN", key = '-SingleFan-', default = True), sg.Radio('Dual Fan', "FAN", key = '-DualFan-')],
         [sg.Radio('Fan w/ Aftercooler', "FAN", key = '-FanAftercooler-'), sg.Radio('Dual Fan w/ Dual Aftercooler', "FAN", key = '-DualFanDualAftercooler-')],
@@ -118,16 +121,16 @@ def CheckBoxWindowNonFord():
         [sg.Checkbox('278610 - Muncie PTO PWM', key = '-278610-')],
 		[sg.OK(pad = (20, 20)), sg.Cancel(pad = (20, 20))]
 		]
-	
-	window = sg.Window('Non-Ford Harnesses', layout)
 
-	event, values = window.Read()
+    window = sg.Window('Non-Ford Harnesses', layout)
 
-	print(event, values)
+    event, values = window.Read()
 
-	window.Close()
+    print(event, values)
 
-	return(event, values)
+    window.Close()
+
+    return(event, values)
 
 #This function takes the data from the events and values passed by the
 #Check box window function and makes a popup window stating
@@ -135,6 +138,11 @@ def CheckBoxWindowNonFord():
 #of the program to be run.
 
 def FordHarnessHash(n):
+
+    """This function takes the data from the events and values
+    passed by the checkbox window function and makes a popup window
+    stating which program the operator should run.  It returns the
+    name of the program to be run.  Ford specific."""
 
     hash = 'Unsupported combination.  Please retry or contact Engineering.'
 
@@ -185,6 +193,11 @@ def FordHarnessHash(n):
 #of the program to be run.
 
 def NonFordHarnessHash(n):
+
+    """This function takes the data from the events and values
+    passed by the checkbox window function and makes a popup window
+    stating which program the operator should run.  It returns the
+    name of the program to be run. NonFord specific."""
 
     #269022 is DP - Dual Pressure
     #269028 is GEN - Generator
@@ -440,12 +453,13 @@ def NonFordHarnessHash(n):
 
     return hash
 
-#This function takes the data from the events and values passed by the
-#Check box window function and makes a popup window stating
-#which program the operator should run. It returns the name
-#of the program to be run.
 
 def VactorHarnessHash(n):
+
+    """This function takes the data from the events and values
+    passed by the checkbox window function and makes a popup window
+    stating which program the operator should run.  It returns the
+    name of the program to be run. Vactor Specific."""
 
     #269022 is DP - Dual Pressure
     #269028 is GEN - Generator
@@ -467,13 +481,14 @@ def VactorHarnessHash(n):
 
     return hash
 
-    #This function checks to see if the user
-    #wants the program to download to NXView or not.
+   
 
 def DLorNo(hash):
 
-    #This function checks to see if the user
-    #wants the program to download to NXView or not.
+    """This function creates a GUI that displays
+    the program to run and checks to see if the
+    user wants to download the main program or not"""
+
     
     ans = False
 
@@ -503,6 +518,9 @@ def DLorNo(hash):
     return(ans)
 
 def harness():
+
+    """Creates the initial GUI where either Ford, NonFord or Vactor is selected.
+    Moves the program through the rest of the GUIs"""
 
     keepGoing = True
 
