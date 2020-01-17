@@ -1,5 +1,4 @@
-('W:\\Nick '
- 'Wilczewski\\HarTester_v0.8\\PythonApplication1\\build\\main\\PYZ-00.pyz',
+('C:\\Users\\nwilczewski\\source\\repos\\TheMightyDotkey\\HarTester_v0.8\\PythonApplication1\\build\\main\\PYZ-00.pyz',
  [('_strptime',
    'C:\\Users\\nwilczewski\\AppData\\Local\\Programs\\Python\\Python36-32\\lib\\_strptime.py',
    'PYMODULE'),
@@ -403,7 +402,7 @@
    'C:\\Users\\nwilczewski\\AppData\\Local\\Programs\\Python\\Python36-32\\lib\\threading.py',
    'PYMODULE'),
   ('NXDown',
-   'W:\\Nick Wilczewski\\HarTester_v0.8\\PythonApplication1\\NXDown.py',
+   'C:\\Users\\nwilczewski\\source\\repos\\TheMightyDotkey\\HarTester_v0.8\\PythonApplication1\\NXDown.py',
    'PYMODULE'),
   ('ctypes',
    'C:\\Users\\nwilczewski\\AppData\\Local\\Programs\\Python\\Python36-32\\lib\\ctypes\\__init__.py',

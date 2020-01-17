@@ -1,5 +1,4 @@
-('W:\\Nick '
- 'Wilczewski\\HarTester_v0.8\\PythonApplication1\\build\\main\\main.exe',
+('C:\\Users\\nwilczewski\\source\\repos\\TheMightyDotkey\\HarTester_v0.8\\PythonApplication1\\build\\main\\main.exe',
  False,
  False,
  True,
@@ -11,8 +10,7 @@
  True,
  'main.pkg',
  [('PYZ-00.pyz',
-   'W:\\Nick '
-   'Wilczewski\\HarTester_v0.8\\PythonApplication1\\build\\main\\PYZ-00.pyz',
+   'C:\\Users\\nwilczewski\\source\\repos\\TheMightyDotkey\\HarTester_v0.8\\PythonApplication1\\build\\main\\PYZ-00.pyz',
    'PYZ'),
   ('struct',
    'C:\\Users\\nwilczewski\\AppData\\Local\\Programs\\Python\\Python36-32\\lib\\struct.pyo',
@@ -33,16 +31,15 @@
    'C:\\Users\\nwilczewski\\AppData\\Local\\Programs\\Python\\Python36-32\\lib\\site-packages\\PyInstaller\\loader\\rthooks\\pyi_rth__tkinter.py',
    'PYSOURCE'),
   ('main',
-   'W:\\Nick Wilczewski\\HarTester_v0.8\\PythonApplication1\\main.py',
+   'C:\\Users\\nwilczewski\\source\\repos\\TheMightyDotkey\\HarTester_v0.8\\PythonApplication1\\main.py',
    'PYSOURCE'),
   ('main.exe.manifest',
-   'W:\\Nick '
-   'Wilczewski\\HarTester_v0.8\\PythonApplication1\\build\\main\\main.exe.manifest',
+   'C:\\Users\\nwilczewski\\source\\repos\\TheMightyDotkey\\HarTester_v0.8\\PythonApplication1\\build\\main\\main.exe.manifest',
    'BINARY')],
  [],
  False,
  False,
- 1573514259,
+ 1579280338,
  [('runw.exe',
    'C:\\Users\\nwilczewski\\AppData\\Local\\Programs\\Python\\Python36-32\\lib\\site-packages\\PyInstaller\\bootloader\\Windows-32bit\\runw.exe',
    'EXECUTABLE')])
