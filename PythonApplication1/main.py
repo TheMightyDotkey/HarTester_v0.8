@@ -614,7 +614,7 @@ def harness():
 
         print(values)
 
-        if event['-Update-'] is True and event not in ('Exit', None):   #Checks if window is canceled or closed
+        if event is '-Update-':   #Checks if window is canceled or closed
 
             Git.git() #resets code to master.  This will wipe your code so don't click update until you have saved to
             #another branch or master
