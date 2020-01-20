@@ -606,7 +606,7 @@ def harness():
 	        [sg.Radio('Ford', "MAKERADIO", key = '-FORD-', default = True, pad = (32, 10)),
 	        sg.Radio('Non-Ford', "MAKERADIO", key = '-NONFORD-', pad = (32, 10)), sg.Radio('Vactor', "MAKERADIO", key = '-VACTOR-', pad = (32, 10)),
             sg.Radio('V-TEC2', "MAKERADIO", key = '-VTEC2-', pad = (32, 10), disabled = 0)], 
-	        [sg.Submit(pad = (95, 10)), sg.Button(button_text = "Update", key = '-Update-'), sg.Exit(pad = (95, 10))]
+	        [sg.Submit(pad = (100, 10)), sg.Exit(pad = (100, 10))]
         ]
 
         window = sg.Window('Harness Selector', layout, size = (570, 100))
@@ -617,13 +617,8 @@ def harness():
 
         print(values)
 
-        if event is '-Update-':   #Checks if window is canceled or closed
 
-            subprocess.call(["py", "Git.py"], cwd = localrepo)
-            sys.exit(0) #resets code to master.  This will wipe your code so don't click update until you have saved to
-            #another branch or master
-
-        elif values['-FORD-'] is True and event not in ('Exit', None):  #Checks if window is canceled or closed
+        if values['-FORD-'] is True and event not in ('Exit', None):  #Checks if window is canceled or closed
             FordHarnesses_event, FordHarnesses_values = CheckBoxWindowFord() #Returns the Ford Harness Tag
 
             if FordHarnesses_event not in ('Cancel', None):  
