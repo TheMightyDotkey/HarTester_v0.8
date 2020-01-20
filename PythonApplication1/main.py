@@ -55,6 +55,39 @@ def CheckBoxWindowVactor():
 #This function gathers the data on what harnesses are being tested from the operator.
 #It returns events and values
 
+def CheckBoxWindowVTEC2():
+
+    layout = [
+        
+        [sg.Text('Select All Harnesses to Be Tested', font = ('Helvetica', 24))],
+		[sg.Checkbox('279173 - Generator ', key = '-279173-')],
+		[sg.Checkbox('279174 - Standard Temp & Press', key = '-279174-', default = True)],
+		[sg.Checkbox('279174 - Redundant Temp & Press', key = '-279174R-', default = False)],
+		[sg.Checkbox('279184 / 279187 & 279860 - PTO 1', key = '-PTO1-', default = True)],
+        [sg.Checkbox('279184 / 279187 & 279652 - PTO 2', key = '-PTO2-', default = False)],
+		[sg.Checkbox('279274 - Remote Start', key = '-279274-')],
+		[sg.Checkbox('279275 - Dual PSI', key = '-279275-', default = False)],
+        [sg.Checkbox('279600 & 279859 - No Load', key = '-279600-', default = False)],
+        [sg.Checkbox('280298 - Oil Sensor', key = '-280298-', default = False)],
+        [sg.Radio('279175 / 279886 / 279983 / 280423 - J1939', "J1939", key = '-279175-', default = True), sg.Radio('279943 - J1939', "J1939", key = '-279943-'), sg.Radio('None - J1939', "J1939", key = '-NoneJ1939-')],
+		[sg.OK(pad = (20, 20)), sg.Cancel(pad = (20, 20))]
+
+        ]
+
+    window = sg.Window('Vactor Harnesses', layout)
+
+    event, values = window.Read()
+
+    print(event, values)
+
+    window.Close()
+
+    return (event, values)
+
+
+#This function gathers the data on what harnesses are being tested from the operator.
+#It returns events and values
+
 def CheckBoxWindowFord():
     """This function gathers the data on which harnesses
     are being tested and what fan config"""
@@ -486,6 +519,29 @@ def VactorHarnessHash(n):
 
     return hash
 
+def VTEC2HarnessHash(n):
+
+    """This function takes the data from the events and values
+    passed by the checkbox window function and makes a popup window
+    stating which program the operator should run.  It returns the
+    name of the program to be run. VTEC2 Specific."""
+
+    hash = 'Unsupported combination.  Please retry or contact Engineering.'
+
+    if n.get('-279174-') and n.get('-PTO1-') and n.get('-279175-'): #Checks to see if it is a normal format NONFord.
+
+        if n.get('-279173-') and n.get('-279275-') and not n.get('-279174R-') and not n.get('-PTO2-') \
+        and not n.get('-279274-') and not n.get('-279600-') and not n.get('-280298-'): #GEN DPSI
+
+            hash = 'Program: VTEC2_131_845, ID: GENDPSI'
+
+        elif not n.get('-279173-')  and not n.get('-279174R-') and not n.get('-PTO2-') \
+        and not n.get('-279274-') and not n.get('-279275-') and not n.get('-279600-')  and not n.get('-280298-'): #Standard No Frills NONFord
+
+            hash = 'Program: VTEC2_131_845, ID: Standard'
+
+    return hash
+
    
 
 def DLorNo(hash):
@@ -537,14 +593,16 @@ def harness():
         Fordpop = 0
         NonFordpop = 0
         Vactorpop = 0
+        VTEC2pop = 0
         FordHarnesses_event = 0
         NonFordHarnesses_event = 0
         VactorHarnesses_event = 0
+        VTEC2Harnesses_event = 0
 
         layout = [
 	        [sg.Radio('Ford', "MAKERADIO", key = '-FORD-', default = True, pad = (32, 10)),
 	        sg.Radio('Non-Ford', "MAKERADIO", key = '-NONFORD-', pad = (32, 10)), sg.Radio('Vactor', "MAKERADIO", key = '-VACTOR-', pad = (32, 10)),
-            sg.Radio('V-TEC2', "MAKERADIO", key = '-VTEC2-', pad = (32, 10), disabled = 1)], #CURRENTLY DISABLED
+            sg.Radio('V-TEC2', "MAKERADIO", key = '-VTEC2-', pad = (32, 10), disabled = 0)], 
 	        [sg.Submit(pad = (100, 10)), sg.Exit(pad = (100, 10))]
         ]
 
@@ -612,6 +670,21 @@ def harness():
                     nxd.Down('Vactor')
 
                     sg.PopupOKCancel(Vactorpop, title = 'Vactor Program')
+
+        elif values['-VTEC2-'] is True and event not in ('Exit', None):   #Checks if window is canceled or closed
+            VTEC2Harnesses_event, VTEC2Harnesses_values = CheckBoxWindowVTEC2() #Returns the Non-Ford Harness Tag
+        
+            if VTEC2Harnesses_event not in ('Cancel', None):  
+            
+                VTEC2pop = VTEC2HarnessHash(VTEC2Harnesses_values)
+
+                downloadQuestion = DLorNo(VTEC2pop) #Checks to see if the user wants to download the main program
+                
+                if downloadQuestion is True:
+
+                    nxd.Down('VTEC2')
+
+                    sg.PopupOKCancel(VTEC2pop, title = 'VTEC2 Program')
 
         elif event in ('Exit', None):
             keepGoing = False

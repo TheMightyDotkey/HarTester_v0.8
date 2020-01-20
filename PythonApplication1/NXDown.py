@@ -19,6 +19,9 @@ def Down(progType):
     elif progType is 'Vactor':
         progLoc = 'W:\\Nick Wilczewski\\NX Data\\Programs\\In Progress\\Proto\\Proto Build v0.8\\Vactor_v0.8.nxf'
 
+    elif progType is 'VTEC2':
+        progLoc = 'W:\\Nick Wilczewski\\NX Data\\Programs\\In Progress\\Proto\\Proto Build v0.8\\VTEC2_131_845.nxf'
+
 
     nxtDll = ctypes.CDLL(r"C:\Program Files (x86)\Dynalab\NX Editor\NXComm.dll")
 
