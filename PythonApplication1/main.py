@@ -2,7 +2,7 @@ print('Startup')
 import PySimpleGUI as sg
 import NXDown as nxd
 import threading
-import Git
+import subprocess
 
 def Splash():
     
@@ -599,6 +599,7 @@ def harness():
         NonFordHarnesses_event = 0
         VactorHarnesses_event = 0
         VTEC2Harnesses_event = 0
+        localrepo = 'C:\\Users\\nwilczewski\\source\\repos\\TheMightyDotkey\\HarTester_v0.8\\PythonApplication1'
 
         layout = [
 	        [sg.Radio('Ford', "MAKERADIO", key = '-FORD-', default = True, pad = (32, 10)),
@@ -617,7 +618,8 @@ def harness():
 
         if event is '-Update-':   #Checks if window is canceled or closed
 
-            Git.git() #resets code to master.  This will wipe your code so don't click update until you have saved to
+            subprocess.call(["Git.py"], cwd = localrepo)
+            exit() #resets code to master.  This will wipe your code so don't click update until you have saved to
             #another branch or master
 
         elif values['-FORD-'] is True and event not in ('Exit', None):  #Checks if window is canceled or closed
