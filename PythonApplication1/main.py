@@ -2,6 +2,7 @@ print('Startup')
 import PySimpleGUI as sg
 import NXDown as nxd
 import threading
+import Git
 
 def Splash():
     
