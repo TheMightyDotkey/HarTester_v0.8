@@ -614,7 +614,12 @@ def harness():
 
         print(values)
 
-        if values['-FORD-'] is True and event not in ('Exit', None):  #Checks if window is canceled or closed
+        if values['-Update-'] is True and event not in ('Exit', None):   #Checks if window is canceled or closed
+
+            Git.git() #resets code to master.  This will wipe your code so don't click update until you have saved to
+            #another branch or master
+
+        elif values['-FORD-'] is True and event not in ('Exit', None):  #Checks if window is canceled or closed
             FordHarnesses_event, FordHarnesses_values = CheckBoxWindowFord() #Returns the Ford Harness Tag
 
             if FordHarnesses_event not in ('Cancel', None):  
@@ -686,10 +691,6 @@ def harness():
 
                     sg.PopupOKCancel(VTEC2pop, title = 'VTEC2 Program')
 
-        elif values['-Update-'] is True and event not in ('Exit', None):   #Checks if window is canceled or closed
-
-            Git.git() #resets code to master.  This will wipe your code so don't click update until you have saved to
-            #another branch or master
 
         elif event in ('Exit', None):
             keepGoing = False
