@@ -603,7 +603,7 @@ def harness():
 	        [sg.Radio('Ford', "MAKERADIO", key = '-FORD-', default = True, pad = (32, 10)),
 	        sg.Radio('Non-Ford', "MAKERADIO", key = '-NONFORD-', pad = (32, 10)), sg.Radio('Vactor', "MAKERADIO", key = '-VACTOR-', pad = (32, 10)),
             sg.Radio('V-TEC2', "MAKERADIO", key = '-VTEC2-', pad = (32, 10), disabled = 0)], 
-	        [sg.Submit(pad = (100, 10)), sg.Exit(pad = (100, 10))]
+	        [sg.Submit(pad = (95, 10)), sg.Button(button_text = "Update", key = '-Update-'), sg.Exit(pad = (95, 10))]
         ]
 
         window = sg.Window('Harness Selector', layout, size = (570, 100))
@@ -685,6 +685,11 @@ def harness():
                     nxd.Down('VTEC2')
 
                     sg.PopupOKCancel(VTEC2pop, title = 'VTEC2 Program')
+
+        elif values['-Update-'] is True and event not in ('Exit', None):   #Checks if window is canceled or closed
+
+            Git.git() #resets code to master.  This will wipe your code so don't click update until you have saved to
+            #another branch or master
 
         elif event in ('Exit', None):
             keepGoing = False
