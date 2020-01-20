@@ -3,6 +3,7 @@ import PySimpleGUI as sg
 import NXDown as nxd
 import threading
 import subprocess
+import sys
 
 def Splash():
     
@@ -619,7 +620,7 @@ def harness():
         if event is '-Update-':   #Checks if window is canceled or closed
 
             subprocess.call(["py", "Git.py"], cwd = localrepo)
-            exit() #resets code to master.  This will wipe your code so don't click update until you have saved to
+            sys.exit(0) #resets code to master.  This will wipe your code so don't click update until you have saved to
             #another branch or master
 
         elif values['-FORD-'] is True and event not in ('Exit', None):  #Checks if window is canceled or closed
