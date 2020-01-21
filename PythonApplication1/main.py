@@ -542,6 +542,11 @@ def VTEC2HarnessHash(n):
 
             hash = 'Program: VTEC2_131_845, ID: Standard'
 
+        elif n.get('-279173-')  and not n.get('-279174R-') and not n.get('-PTO2-') \
+        and not n.get('-279274-') and not n.get('-279275-') and n.get('-279600-')  and not n.get('-280298-'): #Standard No Frills NONFord
+
+            hash = 'Program: VTEC2_131_845, ID: GENNOL'
+
     return hash
 
    
