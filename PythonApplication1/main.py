@@ -363,6 +363,13 @@ def NonFordHarnessHash(n):
             if n.get('-269840-'):
                 hash = 'Program: NonFord_1fan, ID: AUX UH269840'
 
+        #Checks if the harness is "REM".
+        elif not n.get('-269022-') and not n.get('-269028-') and n.get('-PTO-') and not n.get('-AUX-') \
+        and n.get('-277319-') and not n.get('-277896-') and not n.get('-277898-') and not n.get('-278610-'):
+
+            if n.get('-269840-'):
+                hash = 'Program: NonFord_1fan, ID: REM UH269840'
+
         #Checks if the harness is "REM PWM PTO". Standard + REM + PWM PTO.
         elif not n.get('-269022-') and not n.get('-269028-') and n.get('-PTO-') and not n.get('-AUX-') \
         and n.get('-277319-') and not n.get('-277896-') and not n.get('-277898-') and n.get('-278610-'):
