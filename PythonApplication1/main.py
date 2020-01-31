@@ -395,6 +395,9 @@ def NonFordHarnessHash(n):
                 
             elif n.get('-269840-'):
                 hash = 'Program: NonFord_2fan, ID: Standard UH269840'
+
+            elif n.get('-273434-'):
+                hash = 'Program: NonFord_2fan, ID: Standard UH273434'
             
             elif n.get('-273620-'):
                 hash = 'Program: NonFord_2fan, ID: Standard UH273620'
