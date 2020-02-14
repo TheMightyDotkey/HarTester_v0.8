@@ -5,16 +5,16 @@ def Down(progType):
     x = progType
 
     if progType is 'Ford1fan':
-        progLoc = 'W:\\Nick Wilczewski\\NX Data\\Programs\\In Progress\\Proto\\Proto Build v0.8\\Ford_1fan_v1.1.nxf'
+        progLoc = 'W:\\Nick Wilczewski\\NX Data\\Programs\\In Progress\\Proto\\Proto Build v0.8\\Ford_1fan_v1.2.nxf'
     
     elif progType is 'Ford2fan':
-        progLoc = 'W:\\Nick Wilczewski\\NX Data\\Programs\\In Progress\\Proto\\Proto Build v0.8\\Ford_2fan_v1.1.nxf'
+        progLoc = 'W:\\Nick Wilczewski\\NX Data\\Programs\\In Progress\\Proto\\Proto Build v0.8\\Ford_2fan_v1.2.nxf'
 
     elif progType is 'NonFord1fan':
-        progLoc = 'W:\\Nick Wilczewski\\NX Data\\Programs\\In Progress\\Proto\\Proto Build v0.8\\NonFord_1fan_v1.1.nxf'
+        progLoc = 'W:\\Nick Wilczewski\\NX Data\\Programs\\In Progress\\Proto\\Proto Build v0.8\\NonFord_1fan_v1.2.nxf'
 
     elif progType is 'NonFord2fan':
-        progLoc = 'W:\\Nick Wilczewski\\NX Data\\Programs\\In Progress\\Proto\\Proto Build v0.8\\NonFord_2fan_v1.1.nxf'
+        progLoc = 'W:\\Nick Wilczewski\\NX Data\\Programs\\In Progress\\Proto\\Proto Build v0.8\\NonFord_2fan_v1.2.nxf'
 
     elif progType is 'Vactor':
         progLoc = 'W:\\Nick Wilczewski\\NX Data\\Programs\\In Progress\\Proto\\Proto Build v0.8\\Vactor_v0.8.nxf'
