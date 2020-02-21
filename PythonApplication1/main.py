@@ -476,6 +476,13 @@ def NonFordHarnessHash(n):
             if n.get('-274340-'):
                 hash = 'Program: NonFord_2fan, ID: DP GEN UH274340'
 
+        #Checks if the harness is "DP GEN REM". Standard + DP + GEN + REM.
+        elif n.get('-269022-') and n.get('-269028-') and n.get('-PTO-') and not n.get('-AUX-') \
+        and n.get('-277319-') and not n.get('-277896-') and not n.get('-277898-') and not n.get('-278610-'):
+
+            if n.get('-269840-'):
+                hash = 'Program: NonFord_2fan, ID: DP GEN REM UH269840'
+
         #Checks if the harness is "DP GEN NO PTO". Standard + DP + GEN - PTO. This is a Dodge Harness Assy.
         elif n.get('-269022-') and n.get('-269028-') and not n.get('-PTO-') and not n.get('-AUX-') \
         and not n.get('-277319-') and not n.get('-277896-') and not n.get('-277898-') and not n.get('-278610-'):
