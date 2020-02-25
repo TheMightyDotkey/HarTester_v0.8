@@ -567,9 +567,14 @@ def VTEC2HarnessHash(n):
             hash = 'Program: VTEC2_131_845, ID: Standard'
 
         elif n.get('-279173-')  and not n.get('-279174R-') and not n.get('-PTO2-') \
-        and not n.get('-279274-') and not n.get('-279275-') and n.get('-279600-')  and not n.get('-280298-'): #Standard No Frills NONFord
+        and not n.get('-279274-') and not n.get('-279275-') and n.get('-279600-')  and not n.get('-280298-'): #GENNOL NONFord
 
             hash = 'Program: VTEC2_131_845, ID: GENNOL'
+
+        elif n.get('-279173-')  and not n.get('-279174R-') and n.get('-PTO2-') \
+        and n.get('-279274-') and n.get('-279275-') and n.get('-279600-')  and not n.get('-280298-'): #GENERATOR DUAL PSI REMOTE DUAL PTO NO LOAD NONFord
+
+            hash = 'Program: VTEC2_131_845, ID: GENdpsiREMdptoNLOAD'
 
     return hash
 
