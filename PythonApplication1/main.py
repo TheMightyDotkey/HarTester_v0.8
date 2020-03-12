@@ -132,7 +132,7 @@ def CheckBoxWindowNonFord():
 
     """This function gathers the data using a GUI on which
     harnesses are being tested and what fan config
-    specifically for Fords"""
+    specifically for NonFords"""
 
     layout = [
         [sg.Text('Select Fan Setup', font = ('Helvetica', 24))],
@@ -148,6 +148,7 @@ def CheckBoxWindowNonFord():
 		[sg.Checkbox('269030 / 269300 / 269308 in AUX', key = '-AUX-')],
 		[sg.Radio('269828 - Underhood', "UH", key = '-269828-'), sg.Radio('269840 - Underhood', "UH", key = '-269840-', default = True), sg.Radio('273434 - Underhood', "UH", key = '-273434-'), sg.Radio('273620 - Underhood', "UH", key = '-273620-')],
         [sg.Radio('274339 - Underhood', "UH", key = '-274339-'), sg.Radio('274340 - Underhood', "UH", key = '-274340-'), sg.Radio('277136 - Underhood', "UH", key = '-277136-')],
+        [sg.Radio('275065 - Trunk', "TK", key = '-275065-', default = True), sg.Radio('279827 - Trunk', "TK", key = '-279827-')],
         [sg.Checkbox('275469 - Display', key = '-275469-', default = True)],
         [sg.Radio('276206 - J1939', "J1939", key = '-276206-', default = True), sg.Radio('276757 - J1939', "J1939", key = '-276757-'), sg.Radio('None - J1939', "J1939", key = '-NoneJ1939-')],
         [sg.Checkbox('277319 - Remote Start', key = '-277319-')],
@@ -685,11 +686,17 @@ def harness():
                 
                 if downloadQuestion is True:
 
-                    if NonFordHarnesses_values.get('-SingleFan-'):
-                        nxd.Down('NonFord1fan')
+                    if NonFordHarnesses_values.get('-SingleFan-') and NonFordHarnesses_values.get('-275065-'):
+                        nxd.Down('NonFord1fan065')
 
-                    elif NonFordHarnesses_values.get('-DualFan-'):
-                        nxd.Down('NonFord2fan')
+                    elif NonFordHarnesses_values.get('-SingleFan-') and NonFordHarnesses_values.get('-279827-'):
+                        nxd.Down('NonFord1fan827')
+
+                    elif NonFordHarnesses_values.get('-DualFan-') and NonFordHarnesses_values.get('-275056-'):
+                        nxd.Down('NonFord2fan065')
+
+                    elif NonFordHarnesses_values.get('-DualFan-') and NonFordHarnesses_values.get('-279827-'):
+                        nxd.Down('NonFord2fan827')
 
                     sg.PopupOKCancel(NonFordpop, title = 'NonFord Program')
             

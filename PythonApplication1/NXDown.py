@@ -5,22 +5,28 @@ def Down(progType):
     x = progType
 
     if progType is 'Ford1fan':
-        progLoc = 'W:\\Nick Wilczewski\\NX Data\\Programs\\In Progress\\Proto\\Proto Build v0.8\\Ford_1fan_v1.2.nxf'
+        progLoc = 'W:\\Nick Wilczewski\\NX Data\\Programs\\Live Programs\\Ford_1fan_v1.2.nxf'
     
     elif progType is 'Ford2fan':
-        progLoc = 'W:\\Nick Wilczewski\\NX Data\\Programs\\In Progress\\Proto\\Proto Build v0.8\\Ford_2fan_v1.2.nxf'
+        progLoc = 'W:\\Nick Wilczewski\\NX Data\\Programs\\Live Programs\\Ford_2fan_v1.2.nxf'
 
-    elif progType is 'NonFord1fan':
-        progLoc = 'W:\\Nick Wilczewski\\NX Data\\Programs\\In Progress\\Proto\\Proto Build v0.8\\NonFord_1fan_v1.2.nxf'
+    elif progType is 'NonFord1fan065':
+        progLoc = 'W:\\Nick Wilczewski\\NX Data\\Programs\\Live Programs\\NonFord_1fan_v1.2.nxf'
 
-    elif progType is 'NonFord2fan':
-        progLoc = 'W:\\Nick Wilczewski\\NX Data\\Programs\\In Progress\\Proto\\Proto Build v0.8\\NonFord_2fan_v1.2.nxf'
+    elif progType is 'NonFord2fan065':
+        progLoc = 'W:\\Nick Wilczewski\\NX Data\\Programs\\Live Programs\\NonFord_2fan_v1.2.nxf'
+
+    elif progType is 'NonFord1fan827':
+        progLoc = 'W:\\Nick Wilczewski\\NX Data\\Programs\\Live Programs\\NonFord_1fan_v1.3.nxf'
+
+    elif progType is 'NonFord2fan827':
+        progLoc = 'W:\\Nick Wilczewski\\NX Data\\Programs\\Live Programs\\NonFord_2fan_v1.3.nxf'
 
     elif progType is 'Vactor':
-        progLoc = 'W:\\Nick Wilczewski\\NX Data\\Programs\\In Progress\\Proto\\Proto Build v0.8\\Vactor_v0.8.nxf'
+        progLoc = 'W:\\Nick Wilczewski\\NX Data\\Programs\\Live Programs\\Vactor_v0.8.nxf'
 
     elif progType is 'VTEC2':
-        progLoc = 'W:\\Nick Wilczewski\\NX Data\\Programs\\In Progress\\Proto\\Proto Build v0.8\\VTEC2_131_845.nxf'
+        progLoc = 'W:\\Nick Wilczewski\\NX Data\\Programs\\Live Programs\\VTEC2_131_845.nxf'
 
 
     nxtDll = ctypes.CDLL(r"C:\Program Files (x86)\Dynalab\NX Editor\NXComm.dll")
