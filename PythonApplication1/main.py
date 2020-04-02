@@ -494,6 +494,9 @@ def NonFordHarnessHash(n):
 
             if n.get('-273434-'):
                 hash = 'Program: NonFord_2fan, ID: DP UH273434'
+
+            elif n.get('-274340-'):
+                hash = 'Program: NonFord_2fan, ID: DP UH274340'
         
         #Checks if the harness is "DP GEN". Standard + DP + GEN.
         elif n.get('-269022-') and n.get('-269028-') and n.get('-PTO-') and not n.get('-AUX-') \
