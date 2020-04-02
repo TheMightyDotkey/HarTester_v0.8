@@ -770,7 +770,7 @@ def harness():
                     elif NonFordHarnesses_values.get('-SingleFan-') and NonFordHarnesses_values.get('-279827-'):
                         nxd.Down('NonFord1fan827')
 
-                    elif NonFordHarnesses_values.get('-DualFan-') and NonFordHarnesses_values.get('-275056-'):
+                    elif NonFordHarnesses_values.get('-DualFan-') and NonFordHarnesses_values.get('-275065-'):
                         nxd.Down('NonFord2fan065')
 
                     elif NonFordHarnesses_values.get('-DualFan-') and NonFordHarnesses_values.get('-279827-'):
