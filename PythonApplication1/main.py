@@ -98,6 +98,7 @@ def CheckBoxWindowVTEC2REV2():
 		[sg.Checkbox('278610 - PWM PTO', key = '-278610-')],
         [sg.Radio('Brushed Fan(s)', "Fans", key = '-brushedfan-', default = True), sg.Radio('Brushless Fan(s)', "Fans", key = '-brushlessfan-', default = True)],
         [sg.Radio('279175 / 279886 / 279983 / 280423 / NonMRS - J1939', "J1939", key = '-279175-', default = True), sg.Radio('279943 MRS - J1939', "J1939", key = '-279943-')],
+        [sg.Radio('280423 - J1939', "J1939", key = '-280423-')],
 		[sg.OK(pad = (20, 20)), sg.Cancel(pad = (20, 20))]
 
         ]
@@ -640,6 +641,14 @@ def VTEC2REV2HarnessHash(n):
 
             hash = 'Program: VTEC2_REDU, ID: Ford PWMPTO'
 
+        elif n.get('-280423-') and not n.get('-278610-'):
+
+            hash = 'Program: VTEC2_REDU, ID: NonFord 1CAN'
+        
+        elif n.get('-280423-') and n.get('-278610-'):
+
+            hash = 'Program: VTEC2_REDU, ID: NonFord PWMPTO 1CAN'
+
     elif n.get('-brushlessfan-'):
 
         if n.get('-279175-') and not n.get('-278610-'):
@@ -657,6 +666,14 @@ def VTEC2REV2HarnessHash(n):
         elif n.get('-279943-') and n.get('-278610-'):
 
             hash = 'Program: VTEC2_REDU, ID: Ford PWMPTO Brushless'
+
+        elif n.get('-280423-') and not n.get('-278610-'):
+
+            hash = 'Program: VTEC2_REDU, ID: NonFord Brushless 1CAN'
+        
+        elif n.get('-280423-') and n.get('-278610-'):
+
+            hash = 'Program: VTEC2_REDU, ID: NonFord PWM Brshlss 1CAN'
 
 
     return hash
