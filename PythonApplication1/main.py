@@ -97,7 +97,33 @@ def CheckBoxWindowVTEC2REV2():
         [sg.Text('Select Relevant Options', font = ('Helvetica', 24))],
 		[sg.Checkbox('278610 - PWM PTO', key = '-278610-')],
         [sg.Radio('Brushed Fan(s)', "Fans", key = '-brushedfan-', default = True), sg.Radio('Brushless Fan(s)', "Fans", key = '-brushlessfan-', default = True)],
-        [sg.Radio('279175 / 279886 / 279983 / 280423 / NonMRS - J1939', "J1939", key = '-279175-', default = True), sg.Radio('279943 MRS - J1939', "J1939", key = '-279943-')],
+        [sg.Radio('279175 / 279886 / 279983 - J1939', "J1939", key = '-279175-', default = True), sg.Radio('279943 MRS - J1939', "J1939", key = '-279943-')],
+        [sg.Radio('280423 - J1939', "J1939", key = '-280423-')],
+		[sg.OK(pad = (20, 20)), sg.Cancel(pad = (20, 20))]
+
+        ]
+
+    window = sg.Window('V-TEC II Harnesses', layout)
+
+    event, values = window.Read()
+
+    print(event, values)
+
+    window.Close()
+
+    return (event, values)
+
+#This function gathers the data on what harnesses are being tested from the operator.
+#It returns events and values
+
+def CheckBoxWindowVTEC2R280460():
+
+    layout = [
+        
+        [sg.Text('Select Relevant Options', font = ('Helvetica', 24))],
+		[sg.Checkbox('278610 - PWM PTO', key = '-278610-')],
+        [sg.Radio('Brushed Fan(s)', "Fans", key = '-brushedfan-', default = True), sg.Radio('Brushless Fan(s)', "Fans", key = '-brushlessfan-', default = True)],
+        [sg.Radio('279175 / 279886 / 279983 - J1939', "J1939", key = '-279175-', default = True), sg.Radio('279943 MRS - J1939', "J1939", key = '-279943-')],
         [sg.Radio('280423 - J1939', "J1939", key = '-280423-')],
 		[sg.OK(pad = (20, 20)), sg.Cancel(pad = (20, 20))]
 
@@ -678,6 +704,71 @@ def VTEC2REV2HarnessHash(n):
 
     return hash
 
+def VTEC2R280460HarnessHash(n):
+
+    """This function takes the data from the events and values
+    passed by the checkbox window function and makes a popup window
+    stating which program the operator should run.  It returns the
+    name of the program to be run. VTEC2 Specific.  280460 main trunkline
+    specific."""
+
+    hash = 'Unsupported combination.  Please retry or contact Engineering.'
+
+    if n.get('-brushedfan-'):
+
+        if n.get('-279175-') and not n.get('-278610-'):
+
+            hash = 'Program: VTEC2_REDU, ID: NonFord'
+
+        elif n.get('-279175-') and n.get('-278610-'):
+
+            hash = 'Program: VTEC2_REDU, ID: NonFord PWMPTO'
+
+        elif n.get('-279943-') and not n.get('-278610-'):
+
+            hash = 'Program: VTEC2_REDU, ID: Ford'
+
+        elif n.get('-279943-') and n.get('-278610-'):
+
+            hash = 'Program: VTEC2_REDU, ID: Ford PWMPTO'
+
+        elif n.get('-280423-') and not n.get('-278610-'):
+
+            hash = 'Program: VTEC2_REDU, ID: NonFord 1CAN'
+        
+        elif n.get('-280423-') and n.get('-278610-'):
+
+            hash = 'Program: VTEC2_REDU, ID: NonFord PWMPTO 1CAN'
+
+    elif n.get('-brushlessfan-'):
+
+        if n.get('-279175-') and not n.get('-278610-'):
+
+            hash = 'Program: VTEC2_REDU, ID: NonFord Brushless'
+
+        elif n.get('-279175-') and n.get('-278610-'):
+
+            hash = 'Program: VTEC2_REDU, ID: NonFord PWMPTO Brushless'
+
+        elif n.get('-279943-') and not n.get('-278610-'):
+
+            hash = 'Program: VTEC2_REDU, ID: Ford Brushless'
+
+        elif n.get('-279943-') and n.get('-278610-'):
+
+            hash = 'Program: VTEC2_REDU, ID: Ford PWMPTO Brushless'
+
+        elif n.get('-280423-') and not n.get('-278610-'):
+
+            hash = 'Program: VTEC2_REDU, ID: NonFord Brushless 1CAN'
+        
+        elif n.get('-280423-') and n.get('-278610-'):
+
+            hash = 'Program: VTEC2_REDU, ID: NonFord PWM Brshlss 1CAN'
+
+
+    return hash
+
    
 
 def DLorNo(hash):
@@ -731,6 +822,7 @@ def harness():
         Vactorpop = 0
         VTEC2pop = 0
         VTEC2REV2pop = 0
+        VTEC2R280460pop = 0
         FordHarnesses_event = 0
         NonFordHarnesses_event = 0
         VactorHarnesses_event = 0
@@ -740,12 +832,13 @@ def harness():
 
         layout = [
 	        [sg.Radio('Ford', "MAKERADIO", key = '-FORD-', default = True, pad = (32, 10)),
-	        sg.Radio('Non-Ford', "MAKERADIO", key = '-NONFORD-', pad = (32, 10)), sg.Radio('Vactor', "MAKERADIO", key = '-VACTOR-', pad = (32, 10)),
-            sg.Radio('V-TEC2', "MAKERADIO", key = '-VTEC2-', pad = (32, 10), disabled = 0), sg.Radio('V-TEC2 REV02', "MAKERADIO", key = '-VTEC2REV2-', pad = (32, 10), disabled = 0)], 
-	        [sg.Submit(pad = (140, 10)), sg.Exit(pad = (170, 10))]
+	        sg.Radio('Non-Ford', "MAKERADIO", key = '-NONFORD-', pad = (51, 10)), sg.Radio('Vactor', "MAKERADIO", key = '-VACTOR-', pad = (50, 10))],
+            [sg.Radio('V-TEC2', "MAKERADIO", key = '-VTEC2-', pad = (32, 10), disabled = 0), sg.Radio('V-TEC2 REV02', "MAKERADIO", key = '-VTEC2REV2-', pad = (32, 10), disabled = 0),
+            sg.Radio('V-TEC2 280460', "MAKERADIO", key = '-VTEC2R280460-', pad = (32, 10), disabled = 0)], 
+	        [sg.Submit(pad = (80, 10)), sg.Exit(pad = (110, 10))]
         ]
 
-        window = sg.Window('Harness Selector', layout, size = (750, 100))
+        window = sg.Window('Harness Selector', layout, size = (540, 150))
 
         event, values = window.Read()
 
@@ -846,6 +939,21 @@ def harness():
                     nxd.Down('VTEC2REV2')
 
                     sg.PopupOKCancel(VTEC2REV2pop, title = 'VTEC2REV2 Program')
+
+        elif values['-VTEC2R280460-'] is True and event not in ('Exit', None):   #Checks if window is canceled or closed
+            VTEC2R280460Harnesses_event, VTEC2R280460Harnesses_values = CheckBoxWindowVTEC2R280460() #Returns the Non-Ford Harness Tag
+        
+            if VTEC2R280460Harnesses_event not in ('Cancel', None):  
+            
+                VTEC2R280460pop = VTEC2R280460HarnessHash(VTEC2R280460Harnesses_values)
+
+                downloadQuestion = DLorNo(VTEC2R280460pop) #Checks to see if the user wants to download the main program
+                
+                if downloadQuestion is True:
+
+                    nxd.Down('VTEC2R280460')
+
+                    sg.PopupOKCancel(VTEC2R280460pop, title = 'VTEC2R280460 Program')
 
 
         elif event in ('Exit', None):

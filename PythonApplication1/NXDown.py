@@ -31,6 +31,9 @@ def Down(progType):
     elif progType is 'VTEC2REV2':
         progLoc = 'W:\\Nick Wilczewski\\NX Data\\Programs\\Live Programs\\VTEC2_REDU_REV4.nxf'
 
+    elif progType is 'VTEC2R280460':
+        progLoc = 'W:\\Nick Wilczewski\\NX Data\\Programs\\Live Programs\\VTEC2_REDU_REV5.nxf'
+
 
     nxtDll = ctypes.CDLL(r"C:\Program Files (x86)\Dynalab\NX Editor\NXComm.dll")
 
